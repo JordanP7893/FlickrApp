@@ -8,7 +8,7 @@
 import SwiftUI
 
 @main
-struct FlickrAppApp: App {
+struct FlickrApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
