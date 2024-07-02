@@ -21,6 +21,7 @@ struct PhotoCellView: View {
             VStack(alignment: .leading) {
                 Text(title)
                     .font(.title2)
+                    .lineLimit(1)
                 Text(owner)
                     .font(.caption)
                     .italic()
