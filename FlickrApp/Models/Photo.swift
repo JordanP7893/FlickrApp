@@ -22,7 +22,7 @@ extension Photo: Decodable {
     enum CodingKeys: String, CodingKey {
         case id
         case title
-        case owner
+        case owner = "ownername"
         case urlString = "url_m"
     }
 
@@ -32,7 +32,7 @@ extension Photo: Decodable {
         id = try container.decode(String.self, forKey: .id)
         title = try container.decode(String.self, forKey: .title)
         owner = try container.decode(String.self, forKey: .owner)
-        urlString = try container.decode(String.self, forKey: .urlString)
+        urlString = try container.decodeIfPresent(String.self, forKey: .urlString) ?? ""
     }
 }
 

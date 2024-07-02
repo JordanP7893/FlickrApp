@@ -10,7 +10,7 @@ import SwiftUI
 struct PhotoListView: View {
     let columns = Array(repeating: GridItem(alignment: .top), count: 2)
 
-    @State private var viewModel = ViewModel()
+    @State private var viewModel = ViewModel(photoRecentService: PhotoRecents())
 
     var body: some View {
         ScrollView {
@@ -25,6 +25,11 @@ struct PhotoListView: View {
                     }
                 }
             }
+            ProgressView()
+                .dynamicTypeSize(.large)
+                .onAppear {
+                    print("load more...")
+                }
         }
         .task {
             await viewModel.fetchRecentPhotos()

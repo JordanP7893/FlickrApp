@@ -7,7 +7,11 @@
 
 import Foundation
 
-class PhotoRecents {
+protocol PhotoRecentsServiceProtocol {
+    func fetchRecents() async throws -> PhotoResponse
+}
+
+class PhotoRecents: PhotoRecentsServiceProtocol {
     private let decoder: JSONDecoder
 
     init() {
