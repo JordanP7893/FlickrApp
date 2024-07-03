@@ -20,7 +20,7 @@ extension PhotoListView {
 
         func fetchRecentPhotos() async {
             do {
-                let photoData = try await PhotoRecents().fetchRecents()
+                let photoData = try await photoRecentService.fetchRecents()
                 photos = photoData.photos.photo
             } catch {
                 print(error)
