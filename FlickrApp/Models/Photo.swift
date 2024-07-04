@@ -49,6 +49,15 @@ extension Photo: Decodable {
         case urlString = "url_m"
         case latitude
         case longitude
+        case description
+    }
+
+    struct Description: Decodable {
+        let content: String?
+
+        enum CodingKeys: String, CodingKey {
+            case content = "_content"
+        }
     }
 
     init(from decoder: any Decoder) throws {
@@ -56,7 +65,7 @@ extension Photo: Decodable {
 
         id = try container.decode(String.self, forKey: .id)
         title = try container.decode(String.self, forKey: .title).convertBlankToNil()
-        description = ""
+        description = try container.decodeIfPresent(Description.self, forKey: .description)?.content
         owner = try container.decode(String.self, forKey: .owner)
 
         if let tagString = try container.decodeIfPresent(String.self, forKey: .tags) {

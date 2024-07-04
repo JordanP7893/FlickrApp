@@ -47,6 +47,7 @@ struct PhotoListView: View {
                 await viewModel.fetchRecentPhotos()
             }
             .navigationTitle("Photos")
+            .tint(.accent)
         }
     }
 

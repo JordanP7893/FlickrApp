@@ -22,8 +22,11 @@ struct PhotoDetailView: View {
             }
 
             VStack(alignment: .leading) {
-                ScrollView {
-                    Text("Description goes here")
+                if let description = photo.description {
+                    ScrollView {
+                        Text(description)
+                            .font(.body)
+                    }
                 }
 
                 if let latLong = photo.latLong {
@@ -31,6 +34,7 @@ struct PhotoDetailView: View {
                     Map(position: $mapPosition) {
                         Marker("Photo Location", systemImage: "camera.fill", coordinate: latLong)
                             .annotationTitles(.hidden)
+                            .tint(.accent)
                     }
                     .frame(height: 150)
                     .clipShape(RoundedRectangle(cornerRadius: 20))
