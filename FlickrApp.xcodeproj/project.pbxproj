@@ -19,6 +19,7 @@
 		4FFD45142C33F7AD0064BFAC /* PhotoListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FFD45132C33F7AD0064BFAC /* PhotoListView.swift */; };
 		4FFD45162C33F7FB0064BFAC /* PhotoListView+ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FFD45152C33F7FB0064BFAC /* PhotoListView+ViewModel.swift */; };
 		4FFD45192C33FF7A0064BFAC /* PhotoRecents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FFD45182C33FF7A0064BFAC /* PhotoRecents.swift */; };
+		4FFD451D2C35AF9E0064BFAC /* PhotoTagsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FFD451C2C35AF9E0064BFAC /* PhotoTagsView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,6 +56,7 @@
 		4FFD45132C33F7AD0064BFAC /* PhotoListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoListView.swift; sourceTree = "<group>"; };
 		4FFD45152C33F7FB0064BFAC /* PhotoListView+ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotoListView+ViewModel.swift"; sourceTree = "<group>"; };
 		4FFD45182C33FF7A0064BFAC /* PhotoRecents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoRecents.swift; sourceTree = "<group>"; };
+		4FFD451C2C35AF9E0064BFAC /* PhotoTagsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoTagsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,9 +109,7 @@
 			children = (
 				4F3D01352C3324D0001BA109 /* FlickrApp.swift */,
 				4F3D01372C3324D0001BA109 /* ContentView.swift */,
-				4FFD45132C33F7AD0064BFAC /* PhotoListView.swift */,
-				4FFD45152C33F7FB0064BFAC /* PhotoListView+ViewModel.swift */,
-				4F3D01632C332DB2001BA109 /* PhotoCellView.swift */,
+				4FFD451A2C35AAB10064BFAC /* PhotoListView */,
 				4FFD45172C33FF360064BFAC /* Services */,
 				4F3D01602C332B29001BA109 /* Models */,
 				4F3D01392C3324D2001BA109 /* Assets.xcassets */,
@@ -158,6 +158,25 @@
 				4FFD45182C33FF7A0064BFAC /* PhotoRecents.swift */,
 			);
 			path = Services;
+			sourceTree = "<group>";
+		};
+		4FFD451A2C35AAB10064BFAC /* PhotoListView */ = {
+			isa = PBXGroup;
+			children = (
+				4FFD451B2C35AABC0064BFAC /* SupplementaryView */,
+				4FFD45132C33F7AD0064BFAC /* PhotoListView.swift */,
+				4FFD45152C33F7FB0064BFAC /* PhotoListView+ViewModel.swift */,
+			);
+			path = PhotoListView;
+			sourceTree = "<group>";
+		};
+		4FFD451B2C35AABC0064BFAC /* SupplementaryView */ = {
+			isa = PBXGroup;
+			children = (
+				4F3D01632C332DB2001BA109 /* PhotoCellView.swift */,
+				4FFD451C2C35AF9E0064BFAC /* PhotoTagsView.swift */,
+			);
+			path = SupplementaryView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -292,6 +311,7 @@
 			files = (
 				4FFD45162C33F7FB0064BFAC /* PhotoListView+ViewModel.swift in Sources */,
 				4F3D01622C332B37001BA109 /* Photo.swift in Sources */,
+				4FFD451D2C35AF9E0064BFAC /* PhotoTagsView.swift in Sources */,
 				4F3D01382C3324D0001BA109 /* ContentView.swift in Sources */,
 				4F3D01362C3324D0001BA109 /* FlickrApp.swift in Sources */,
 				4F3D01642C332DB2001BA109 /* PhotoCellView.swift in Sources */,
@@ -456,7 +476,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"FlickrApp/Preview Content\"";
-				DEVELOPMENT_TEAM = D9D8P62K25;
+				DEVELOPMENT_TEAM = 2A67HQMEUP;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -475,7 +495,7 @@
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 14.5;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.jordanp7893.FlickrApp;
+				PRODUCT_BUNDLE_IDENTIFIER = com.jordanp7893.Flickr;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = auto;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
@@ -494,7 +514,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"FlickrApp/Preview Content\"";
-				DEVELOPMENT_TEAM = D9D8P62K25;
+				DEVELOPMENT_TEAM = 2A67HQMEUP;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -513,7 +533,7 @@
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 14.5;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.jordanp7893.FlickrApp;
+				PRODUCT_BUNDLE_IDENTIFIER = com.jordanp7893.Flickr;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = auto;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";

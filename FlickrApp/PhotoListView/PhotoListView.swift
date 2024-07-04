@@ -18,19 +18,27 @@ struct PhotoListView: View {
                 LazyVGrid(columns: columns) {
                     ForEach(viewModel.photos) { photo in
                         if let url = photo.url {
-                            NavigationLink {
-                                Text(photo.title)
-                            } label: {
-                                PhotoCellView(
-                                    title: photo.title,
-                                    owner: photo.owner,
-                                    url: url
-                                )
+                            VStack {
+                                NavigationLink {
+                                    Text(photo.title)
+                                } label: {
+                                    PhotoCellView(
+                                        title: photo.title,
+                                        owner: photo.owner,
+                                        url: url
+                                    )
+                                }
+                                .foregroundStyle(.primary)
+
+                                if let tags = photo.tags {
+                                    PhotoTagsView(tags: tags)
+                                        .padding(5)
+                                }
                             }
-                            .foregroundStyle(.primary)
                         }
                     }
                 }
+                .padding()
 
                 ProgressView()
                     .onAppear {

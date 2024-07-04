@@ -29,7 +29,8 @@ class PhotoRecents: PhotoRecentsServiceProtocol {
             URLQueryItem(name: "api_key", value: "202c946c3bcf9cb1670d9a3ecc2d766f"),
             URLQueryItem(name: "format", value: "json"),
             URLQueryItem(name: "nojsoncallback", value: "1"),
-            URLQueryItem(name: "extras", value: "url_m, owner_name")
+            URLQueryItem(name: "has_geo", value: "1"),
+            URLQueryItem(name: "extras", value: "url_m, owner_name, tags, geo")
         ]
 
         guard let url = components.url else { throw URLError(.badURL) }

@@ -19,17 +19,14 @@ struct PhotoCellView: View {
             PhotoImageView(url: url)
 
             VStack(alignment: .leading) {
-                Text(title)
-                    .font(.title2)
-                    .lineLimit(1)
                 Text(owner)
                     .font(.caption)
                     .italic()
                     .foregroundStyle(.secondary)
+                    .lineLimit(1)
             }
             .frame(maxWidth: .infinity, alignment: .leading)
         }
-        .padding()
     }
 }
 
