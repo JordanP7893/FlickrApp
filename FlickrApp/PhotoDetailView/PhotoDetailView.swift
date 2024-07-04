@@ -43,6 +43,7 @@ struct PhotoDetailView: View {
             .padding(10)
         }
         .ignoresSafeArea(edges: .top)
+        .toolbarRole(.editor)
         .toolbarTitleDisplayMode(.inline)
         .toolbarBackground(.hidden, for: .navigationBar)
         .onAppear {

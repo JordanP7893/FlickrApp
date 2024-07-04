@@ -19,15 +19,28 @@ struct PhotoListView: View {
                     ForEach(viewModel.photos) { photo in
                         if let url = photo.url {
                             VStack {
-                                NavigationLink {
-                                    PhotoDetailView(photo: photo)
-                                } label: {
-                                    PhotoCellView(
-                                        owner: photo.owner,
-                                        url: url
-                                    )
+                                ZStack(alignment: .bottomTrailing) {
+                                    NavigationLink {
+                                        PhotoDetailView(photo: photo)
+                                    } label: {
+                                        PhotoCellView(
+                                            owner: photo.owner,
+                                            url: url
+                                        )
+                                    }
+                                    .foregroundStyle(.primary)
+
+                                    AsyncImage(url: photo.buddyUrl) { image in
+                                        image
+                                            .resizable()
+                                    } placeholder: {
+                                        Image("ProfilePlaceholder")
+                                            .resizable()
+                                    }
+                                    .frame(width: 48, height: 48)
+                                    .clipShape(Circle())
+                                    .shadow(radius: 10, x: 2, y: 2)
                                 }
-                                .foregroundStyle(.primary)
 
                                 if let tags = photo.tags {
                                     PhotoTagsView(tags: tags)
@@ -47,7 +60,6 @@ struct PhotoListView: View {
                 await viewModel.fetchRecentPhotos()
             }
             .navigationTitle("Photos")
-            .tint(.accent)
         }
     }
 

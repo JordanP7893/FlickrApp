@@ -31,7 +31,7 @@ class PhotoRecents: PhotoRecentsServiceProtocol {
             URLQueryItem(name: "nojsoncallback", value: "1"),
             URLQueryItem(name: "has_geo", value: "1"),
             URLQueryItem(name: "sort", value: "interestingness-desc"),
-            URLQueryItem(name: "extras", value: "url_m, owner_name, tags, geo")
+            URLQueryItem(name: "extras", value: "url_m, owner_name, tags, geo, icon_server")
         ]
 
         guard let url = components.url else { throw URLError(.badURL) }

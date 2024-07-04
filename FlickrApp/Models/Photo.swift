@@ -15,10 +15,19 @@ struct Photo: Identifiable {
     let owner: String
     let tags: [String]?
     let urlString: String
+    let buddyUrlString: String
     let latLong: CLLocationCoordinate2D?
 
     var url: URL? {
         return URL(string: urlString)
+    }
+
+    var buddyUrl: URL {
+        if let url = URL(string: buddyUrlString) {
+            return url
+        } else {
+            return URL(string: "https://www.flickr.com/images/buddyicon.gif")!
+        }
     }
 
     init(
@@ -28,6 +37,7 @@ struct Photo: Identifiable {
         owner: String,
         tags: [String]? = nil,
         urlString: String,
+        buddyUrlString: String = "https://www.flickr.com/images/buddyicon.gif",
         latLong: CLLocationCoordinate2D? = nil
     ) {
         self.id = id
@@ -36,6 +46,7 @@ struct Photo: Identifiable {
         self.owner = owner
         self.tags = tags
         self.urlString = urlString
+        self.buddyUrlString = buddyUrlString
         self.latLong = latLong
     }
 }
@@ -44,12 +55,15 @@ extension Photo: Decodable {
     enum CodingKeys: String, CodingKey {
         case id
         case title
-        case owner = "ownername"
+        case ownerId = "owner"
+        case ownerName = "ownername"
         case tags
         case urlString = "url_m"
         case latitude
         case longitude
         case description
+        case iconServer = "iconserver"
+        case iconFarm = "iconfarm"
     }
 
     struct Description: Decodable {
@@ -66,7 +80,7 @@ extension Photo: Decodable {
         id = try container.decode(String.self, forKey: .id)
         title = try container.decode(String.self, forKey: .title).convertBlankToNil()
         description = try container.decodeIfPresent(Description.self, forKey: .description)?.content
-        owner = try container.decode(String.self, forKey: .owner)
+        owner = try container.decode(String.self, forKey: .ownerName)
 
         if let tagString = try container.decodeIfPresent(String.self, forKey: .tags) {
             tags = tagString.split(separator: " ").map { String($0) }
@@ -76,8 +90,17 @@ extension Photo: Decodable {
 
         urlString = try container.decodeIfPresent(String.self, forKey: .urlString) ?? ""
 
+        let iconFarm = Int(try container.decode(Double.self, forKey: .iconFarm))
+        let iconServer = try container.decode(String.self, forKey: .iconServer)
+        let ownerId = try container.decode(String.self, forKey: .ownerId)
+
+        buddyUrlString = "https://farm\(iconFarm).staticflickr.com/\(iconServer)/buddyicons/\(ownerId).jpg"
+
+        print(buddyUrlString)
+
         var latitude: Double?
         var longitude: Double?
+
         do {
             latitude = try container.decode(Double.self, forKey: .latitude)
         } catch {
@@ -105,7 +128,7 @@ extension Photo {
             title: "Wood Storks",
             owner: "walterjeffords",
             tags: ["birds", "storks", "water", "nature"],
-            urlString: "https://live.staticflickr.com/65535/53827544342_4beb3676a5.jpg",
+            urlString: "http://farm4.staticflickr.com/3666/buddyicons/9619972@N08.jpg",
             latLong: .init(latitude: 51, longitude: -0.000500)
         )
     }
@@ -114,7 +137,7 @@ extension Photo {
 extension Array where Element == Photo {
     static var dummyData: [Photo] {
         return [
-            Photo(id: "53831638407", title: "", owner: "waynewalterberry", tags: ["nature", "lighthouse", "hilltop", "summer"], urlString: "https://live.staticflickr.com/65535/53831638407_a0a4b2b9d8.jpg"),
+            Photo(id: "53831638407", title: "", owner: "waynewalterberry", tags: ["nature", "lighthouse", "hilltop", "summer"], urlString: "https://live.staticflickr.com/65535/53831638407_a0a4b2b9d8.jpg", buddyUrlString: "https://farm4.staticflickr.com/3666/buddyicons/9619972@N08.jpg"),
             Photo(id: "53831638912", title: "en_wordcloud.png", owner: "ujimasa", tags: ["screenshot"], urlString: "https://live.staticflickr.com/65535/53831638912_76768a5dbb.jpg"),
             Photo(id: "53831639917", title: "75e", owner: "infohomecop", urlString: "https://live.staticflickr.com/65535/53831639917_47d2ca4de0.jpg"),
             Photo(id: "53831640532", title: "Foto: Eduardo Barreto", owner: "Câmara Municipal de Vereadores", urlString: "https://live.staticflickr.com/65535/53831640532_2f0e7470bc.jpg"),
