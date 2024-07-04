@@ -20,10 +20,9 @@ struct PhotoListView: View {
                         if let url = photo.url {
                             VStack {
                                 NavigationLink {
-                                    Text(photo.title)
+                                    PhotoDetailView(photo: photo)
                                 } label: {
                                     PhotoCellView(
-                                        title: photo.title,
                                         owner: photo.owner,
                                         url: url
                                     )

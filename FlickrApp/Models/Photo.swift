@@ -9,7 +9,7 @@ import Foundation
 
 struct Photo: Identifiable {
     let id: String
-    let title: String
+    let title: String?
     let owner: String
     let tags: [String]?
     let urlString: String
@@ -32,7 +32,7 @@ extension Photo: Decodable {
         let container = try decoder.container(keyedBy: CodingKeys.self)
 
         id = try container.decode(String.self, forKey: .id)
-        title = try container.decode(String.self, forKey: .title)
+        title = try container.decode(String.self, forKey: .title).convertBlankToNil()
         owner = try container.decode(String.self, forKey: .owner)
 
         if let tagString = try container.decodeIfPresent(String.self, forKey: .tags) {
