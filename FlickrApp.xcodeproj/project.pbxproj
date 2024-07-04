@@ -101,8 +101,8 @@
 		4F3C68252C36A62B00972C6B /* PhotoDetailView */ = {
 			isa = PBXGroup;
 			children = (
-				4FFD451E2C3697090064BFAC /* PhotoDetailView.swift */,
 				4F99042F2C36A8B80000E5FC /* SupplementaryViews */,
+				4FFD451E2C3697090064BFAC /* PhotoDetailView.swift */,
 			);
 			path = PhotoDetailView;
 			sourceTree = "<group>";

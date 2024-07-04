@@ -20,6 +20,7 @@ struct PhotoHeroView: View {
                 } placeholder: {
                     ProgressView()
                 }
+                .frame(minHeight: 200)
 
                 Rectangle()
                     .fill(.ultraThinMaterial)
@@ -52,8 +53,8 @@ struct PhotoHeroView: View {
                 .lineLimit(1)
                 .foregroundStyle(.white)
                 .padding(5)
+                .shadow(radius: 10)
             }
-            .ignoresSafeArea(edges: .top)
         }
     }
 }

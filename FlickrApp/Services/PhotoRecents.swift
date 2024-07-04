@@ -25,11 +25,12 @@ class PhotoRecents: PhotoRecentsServiceProtocol {
         components.host = "www.flickr.com"
         components.path = "/services/rest/"
         components.queryItems = [
-            URLQueryItem(name: "method", value: "flickr.photos.getRecent"),
+            URLQueryItem(name: "method", value: "flickr.photos.search"),
             URLQueryItem(name: "api_key", value: "202c946c3bcf9cb1670d9a3ecc2d766f"),
             URLQueryItem(name: "format", value: "json"),
             URLQueryItem(name: "nojsoncallback", value: "1"),
             URLQueryItem(name: "has_geo", value: "1"),
+            URLQueryItem(name: "sort", value: "interestingness-desc"),
             URLQueryItem(name: "extras", value: "url_m, owner_name, tags, geo")
         ]
 

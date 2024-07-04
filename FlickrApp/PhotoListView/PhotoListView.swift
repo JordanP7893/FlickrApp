@@ -31,7 +31,6 @@ struct PhotoListView: View {
 
                                 if let tags = photo.tags {
                                     PhotoTagsView(tags: tags)
-                                        .padding(5)
                                 }
                             }
                         }
