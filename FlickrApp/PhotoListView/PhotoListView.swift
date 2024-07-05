@@ -10,6 +10,7 @@ import SwiftUI
 struct PhotoListView: View {
     let columns = Array(repeating: GridItem(alignment: .top), count: 2)
 
+    @EnvironmentObject var userPhotosService: UserPhotosService
     @State private var viewModel: ViewModel
 
     var body: some View {
@@ -31,7 +32,14 @@ struct PhotoListView: View {
                                     .foregroundStyle(.primary)
 
                                     NavigationLink {
-                                        Text("Profile View for \(photo.ownerId)")
+                                        UserProfieView(
+                                            ownerName: photo.owner,
+                                            buddyUrl: photo.buddyUrl,
+                                            viewModel: .init(
+                                                userId: photo.ownerId,
+                                                userPhotosService: userPhotosService
+                                            )
+                                        )
                                     } label: {
                                         AsyncImage(url: photo.buddyUrl) { image in
                                             image
@@ -61,7 +69,7 @@ struct PhotoListView: View {
                     }
             }
             .task {
-                await viewModel.fetchRecentPhotos()
+                await viewModel.fetchPopularPhotos()
             }
             .navigationTitle("Photos")
         }
@@ -73,13 +81,14 @@ struct PhotoListView: View {
 }
 
 #Preview {
-    class FakePhotoRecentsService: PhotoRecentsServiceProtocol {
-        func fetchRecents() async throws -> PhotoResponse {
+    class FakePhotoSearchService: PhotoSearchServiceProtocol {
+        func fetchPopularPhotos() async throws -> PhotoResponse {
             return .init(photos: .init(page: 1, pages: 1, perpage: 1, total: 1, photo: .dummyData))
         }
     }
 
-    let photoRecentsService = FakePhotoRecentsService()
+    let photoSearchService = FakePhotoSearchService()
 
-    return PhotoListView(viewModel: .init(photoRecentService: photoRecentsService))
+    return PhotoListView(viewModel: .init(photoSearchService: photoSearchService))
+        .environmentObject(UserPhotosService(flickrApi: FlickrApiService()))
 }

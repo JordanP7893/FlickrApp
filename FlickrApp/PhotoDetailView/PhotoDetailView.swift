@@ -15,32 +15,33 @@ struct PhotoDetailView: View {
 
     var body: some View {
         VStack {
-            PhotoHeroView(photo: photo)
-            if let tags = photo.tags {
-                PhotoTagsView(tags: tags, font: .subheadline)
-                    .contentMargins(.horizontal, 10, for: .scrollContent)
-            }
+            ScrollView {
+                PhotoHeroView(photo: photo)
+                if let tags = photo.tags {
+                    PhotoTagsView(tags: tags, font: .subheadline)
+                        .contentMargins(.horizontal, 10, for: .scrollContent)
+                }
 
-            VStack(alignment: .leading) {
-                if let description = photo.description {
-                    ScrollView {
+                Spacer()
+
+                VStack(alignment: .leading) {
+                    if let description = photo.description {
                         Text(description)
                             .font(.body)
                     }
-                }
 
-                if let latLong = photo.latLong {
-                    Spacer()
-                    Map(position: $mapPosition) {
-                        Marker("Photo Location", systemImage: "camera.fill", coordinate: latLong)
-                            .annotationTitles(.hidden)
-                            .tint(.accent)
+                    if let latLong = photo.latLong {
+                        Map(position: $mapPosition) {
+                            Marker("Photo Location", systemImage: "camera.fill", coordinate: latLong)
+                                .annotationTitles(.hidden)
+                                .tint(.accent)
+                        }
+                        .frame(height: 150)
+                        .clipShape(RoundedRectangle(cornerRadius: 20))
                     }
-                    .frame(height: 150)
-                    .clipShape(RoundedRectangle(cornerRadius: 20))
                 }
+                .padding(10)
             }
-            .padding(10)
         }
         .ignoresSafeArea(edges: .top)
         .toolbarRole(.editor)
@@ -53,6 +54,7 @@ struct PhotoDetailView: View {
         }
     }
 }
+
 
 #Preview {
     NavigationStack {

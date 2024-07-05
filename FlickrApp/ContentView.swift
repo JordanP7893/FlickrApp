@@ -8,17 +8,21 @@
 import SwiftUI
 
 struct ContentView: View {
-    @EnvironmentObject var photoRecentService: PhotoRecents
+    @EnvironmentObject var photoSearchService: PhotoSearchService
 
     var body: some View {
         PhotoListView(
             viewModel: .init(
-                photoRecentService: photoRecentService
+                photoSearchService: photoSearchService
             )
         )
     }
 }
 
 #Preview {
-    ContentView()
+    let flickrApi = FlickrApiService()
+    let photoSearchService = PhotoSearchService(flickrApi: FlickrApiService())
+
+    return ContentView()
+        .environmentObject(photoSearchService)
 }

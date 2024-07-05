@@ -12,15 +12,15 @@ extension PhotoListView {
     class ViewModel {
         private(set) var photos: [Photo] = []
 
-        let photoRecentService: PhotoRecentsServiceProtocol!
+        let photoSearchService: PhotoSearchServiceProtocol!
 
-        init(photoRecentService: PhotoRecentsServiceProtocol!) {
-            self.photoRecentService = photoRecentService
+        init(photoSearchService: PhotoSearchServiceProtocol!) {
+            self.photoSearchService = photoSearchService
         }
 
-        func fetchRecentPhotos() async {
+        func fetchPopularPhotos() async {
             do {
-                let photoData = try await photoRecentService.fetchRecents()
+                let photoData = try await photoSearchService.fetchPopularPhotos()
                 photos = photoData.photos.photo
             } catch {
                 print(error)

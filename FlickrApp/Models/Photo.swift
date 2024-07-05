@@ -129,7 +129,7 @@ extension Photo {
             title: "Wood Storks",
             owner: "walterjeffords",
             tags: ["birds", "storks", "water", "nature"],
-            urlString: "http://farm4.staticflickr.com/3666/buddyicons/9619972@N08.jpg",
+            urlString: "https://live.staticflickr.com/65535/53831658852_bcac62e809.jpg",
             latLong: .init(latitude: 51, longitude: -0.000500)
         )
     }

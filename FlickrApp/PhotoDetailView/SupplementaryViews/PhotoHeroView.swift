@@ -38,7 +38,7 @@ struct PhotoHeroView: View {
                                 .frame(height: 40)
                         }
                     }
-                    .frame(height: 120)
+                    .frame(height: 200)
 
                 VStack(alignment: .leading) {
                     if let title = photo.title {
