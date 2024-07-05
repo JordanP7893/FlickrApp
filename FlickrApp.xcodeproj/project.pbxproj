@@ -14,6 +14,8 @@
 		4F1F1FA32C380DFE0067D7BE /* UserPhotosService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F1F1FA22C380DFE0067D7BE /* UserPhotosService.swift */; };
 		4F1F1FA52C381B050067D7BE /* PhotoResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F1F1FA42C381B050067D7BE /* PhotoResponse.swift */; };
 		4F1F1FA82C383AA10067D7BE /* MockPhotoSearchService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F1F1FA72C383AA10067D7BE /* MockPhotoSearchService.swift */; };
+		4F1F1FAB2C3846C90067D7BE /* UserProfileViewViewModeltests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F1F1FAA2C3846C90067D7BE /* UserProfileViewViewModeltests.swift */; };
+		4F1F1FAF2C3847170067D7BE /* MockUserPhotosService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F1F1FAE2C3847170067D7BE /* MockUserPhotosService.swift */; };
 		4F3C68242C36A5F700972C6B /* PhotoHeroView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F3C68232C36A5F700972C6B /* PhotoHeroView.swift */; };
 		4F3D01362C3324D0001BA109 /* FlickrApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F3D01352C3324D0001BA109 /* FlickrApp.swift */; };
 		4F3D01382C3324D0001BA109 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F3D01372C3324D0001BA109 /* ContentView.swift */; };
@@ -56,6 +58,8 @@
 		4F1F1FA22C380DFE0067D7BE /* UserPhotosService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPhotosService.swift; sourceTree = "<group>"; };
 		4F1F1FA42C381B050067D7BE /* PhotoResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoResponse.swift; sourceTree = "<group>"; };
 		4F1F1FA72C383AA10067D7BE /* MockPhotoSearchService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockPhotoSearchService.swift; sourceTree = "<group>"; };
+		4F1F1FAA2C3846C90067D7BE /* UserProfileViewViewModeltests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileViewViewModeltests.swift; sourceTree = "<group>"; };
+		4F1F1FAE2C3847170067D7BE /* MockUserPhotosService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockUserPhotosService.swift; sourceTree = "<group>"; };
 		4F3C68232C36A5F700972C6B /* PhotoHeroView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoHeroView.swift; sourceTree = "<group>"; };
 		4F3D01322C3324D0001BA109 /* FlickrApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FlickrApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4F3D01352C3324D0001BA109 /* FlickrApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlickrApp.swift; sourceTree = "<group>"; };
@@ -123,6 +127,7 @@
 			isa = PBXGroup;
 			children = (
 				4F1F1FA72C383AA10067D7BE /* MockPhotoSearchService.swift */,
+				4F1F1FAE2C3847170067D7BE /* MockUserPhotosService.swift */,
 			);
 			path = Mocks;
 			sourceTree = "<group>";
@@ -135,6 +140,15 @@
 				4F1F1F9B2C37F0B30067D7BE /* UserProfileView */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		4F1F1FB02C3848080067D7BE /* ViewModelTests */ = {
+			isa = PBXGroup;
+			children = (
+				4F3D01472C3324D2001BA109 /* PhotoListViewViewModelTests.swift */,
+				4F1F1FAA2C3846C90067D7BE /* UserProfileViewViewModeltests.swift */,
+			);
+			path = ViewModelTests;
 			sourceTree = "<group>";
 		};
 		4F3C68252C36A62B00972C6B /* PhotoDetailView */ = {
@@ -194,7 +208,7 @@
 			isa = PBXGroup;
 			children = (
 				4F1F1FA62C383A900067D7BE /* Mocks */,
-				4F3D01472C3324D2001BA109 /* PhotoListViewViewModelTests.swift */,
+				4F1F1FB02C3848080067D7BE /* ViewModelTests */,
 			);
 			path = FlickrAppTests;
 			sourceTree = "<group>";
@@ -408,6 +422,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				4F1F1FA82C383AA10067D7BE /* MockPhotoSearchService.swift in Sources */,
+				4F1F1FAF2C3847170067D7BE /* MockUserPhotosService.swift in Sources */,
+				4F1F1FAB2C3846C90067D7BE /* UserProfileViewViewModeltests.swift in Sources */,
 				4F3D01482C3324D2001BA109 /* PhotoListViewViewModelTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

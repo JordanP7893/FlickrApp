@@ -10,7 +10,7 @@ import Foundation
 extension PhotoListView {
     @Observable
     class ViewModel {
-        private(set) var photos: [Photo] = []
+        private(set) var state: State = .loading
 
         let photoSearchService: PhotoSearchServiceProtocol!
 
@@ -19,12 +19,20 @@ extension PhotoListView {
         }
 
         func fetchPopularPhotos() async {
+            if case let .content(photos) = state, !photos.isEmpty { return }
+
             do {
                 let photoData = try await photoSearchService.fetchPopularPhotos()
-                photos = photoData.photos.photo
+                state = .content(photoData.photos.photo)
             } catch {
-                print(error)
+                state = .error
             }
+        }
+
+        enum State: Equatable {
+            case content([Photo])
+            case error
+            case loading
         }
     }
 }

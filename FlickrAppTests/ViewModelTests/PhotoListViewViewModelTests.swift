@@ -25,19 +25,19 @@ final class PhotoListViewViewModelTests: XCTestCase {
         super.tearDown()
     }
 
-    func test_givenFetchPopularPhotsReturnsData_whenFetchPopularPhototsIsCalled_photosVariableIsSet() async {
+    func test_givenFetchPopularPhotosReturnsData_whenFetchPopularPhototsIsCalled_photosVariableIsSet() async {
         mockPhotoSearchService.fetchPopularPhotosResult = .success(.dummy)
 
         await viewModel.fetchPopularPhotos()
 
-        XCTAssertEqual(viewModel.photos, PhotoResponse.dummy.photos.photo)
+        XCTAssertEqual(viewModel.state, .content(PhotoResponse.dummy.photos.photo))
     }
 
-    func test_givenFetchPopularPhotsReturnsError_whenFetchPopularPhototsIsCalled_errorFlagIsSet() async {
+    func test_givenFetchPopularPhotosReturnsError_whenFetchPopularPhototsIsCalled_errorFlagIsSet() async {
         mockPhotoSearchService.fetchPopularPhotosResult = .failure(URLError.init(.badURL))
 
         await viewModel.fetchPopularPhotos()
 
-        XCTAssertTrue(viewModel.photos.isEmpty)
+        XCTAssertEqual(viewModel.state, .error)
     }
 }
