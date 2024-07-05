@@ -30,16 +30,20 @@ struct PhotoListView: View {
                                     }
                                     .foregroundStyle(.primary)
 
-                                    AsyncImage(url: photo.buddyUrl) { image in
-                                        image
-                                            .resizable()
-                                    } placeholder: {
-                                        Image("ProfilePlaceholder")
-                                            .resizable()
+                                    NavigationLink {
+                                        Text("Profile View for \(photo.ownerId)")
+                                    } label: {
+                                        AsyncImage(url: photo.buddyUrl) { image in
+                                            image
+                                                .resizable()
+                                        } placeholder: {
+                                            Image("ProfilePlaceholder")
+                                                .resizable()
+                                        }
+                                        .frame(width: 48, height: 48)
+                                        .clipShape(Circle())
+                                        .shadow(radius: 10, x: 2, y: 2)
                                     }
-                                    .frame(width: 48, height: 48)
-                                    .clipShape(Circle())
-                                    .shadow(radius: 10, x: 2, y: 2)
                                 }
 
                                 if let tags = photo.tags {

@@ -9,9 +9,12 @@ import SwiftUI
 
 @main
 struct FlickrApp: App {
+    let recentPhotosService = PhotoRecents()
+
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .environmentObject(recentPhotosService)
         }
     }
 }

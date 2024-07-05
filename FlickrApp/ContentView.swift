@@ -8,10 +8,12 @@
 import SwiftUI
 
 struct ContentView: View {
+    @EnvironmentObject var photoRecentService: PhotoRecents
+
     var body: some View {
         PhotoListView(
             viewModel: .init(
-                photoRecentService: PhotoRecents()
+                photoRecentService: photoRecentService
             )
         )
     }

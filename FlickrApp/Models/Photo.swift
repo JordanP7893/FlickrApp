@@ -12,6 +12,7 @@ struct Photo: Identifiable {
     let id: String
     let title: String?
     let description: String?
+    let ownerId: String
     let owner: String
     let tags: [String]?
     let urlString: String
@@ -34,6 +35,7 @@ struct Photo: Identifiable {
         id: String,
         title: String?,
         description: String? = nil,
+        ownerId: String = "",
         owner: String,
         tags: [String]? = nil,
         urlString: String,
@@ -43,6 +45,7 @@ struct Photo: Identifiable {
         self.id = id
         self.title = title
         self.description = description
+        self.ownerId = ownerId
         self.owner = owner
         self.tags = tags
         self.urlString = urlString
@@ -92,11 +95,9 @@ extension Photo: Decodable {
 
         let iconFarm = Int(try container.decode(Double.self, forKey: .iconFarm))
         let iconServer = try container.decode(String.self, forKey: .iconServer)
-        let ownerId = try container.decode(String.self, forKey: .ownerId)
+        ownerId = try container.decode(String.self, forKey: .ownerId)
 
         buddyUrlString = "https://farm\(iconFarm).staticflickr.com/\(iconServer)/buddyicons/\(ownerId).jpg"
-
-        print(buddyUrlString)
 
         var latitude: Double?
         var longitude: Double?

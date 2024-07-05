@@ -11,7 +11,7 @@ protocol PhotoRecentsServiceProtocol {
     func fetchRecents() async throws -> PhotoResponse
 }
 
-class PhotoRecents: PhotoRecentsServiceProtocol {
+class PhotoRecents: PhotoRecentsServiceProtocol, ObservableObject {
     private let decoder: JSONDecoder
 
     init() {
