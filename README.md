@@ -9,8 +9,8 @@
 ## Features
 
 - **Display Popular Photos:** Fetch and display a list of popular photos from the Flickr API.
-- **Photo Details:** View more information about each photo, including tags and a mpa view with the location the photo was taken.
-- **User Photos:** Explore more photos by a specific users in an Instagram style view.
+- **Photo Details:** View more information about each photo, including tags and a map view with the location the photo was taken.
+- **User Photos:** Explore more photos by a specific users in an "Instagram style" view.
 
 ## Architecture
 
@@ -21,5 +21,5 @@
 
 ### Protocols
 
-- **Testability:** The use of protocols makes the code more modular and easier to test. This is crucial for maintaining a high-quality codebase.
+- **Testability:** The use of protocols makes the code more modular and easier to test. This is important for maintaining a high-quality codebase.
 - **Xcode Previews:** Protocols also facilitate the use of Xcode previews, allowing for faster and more efficient UI development.
