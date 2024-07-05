@@ -4,6 +4,8 @@
 
 **FlickrApp** makes use of the Flickr API to display a list of popular photos from the service. Users can tap on photos view detailed information and location data for each photo and explore more photos by specific users.
 
+![](https://github.com/JordanP7893/FlickrApp/blob/main/demo.gif)
+
 ## Features
 
 - **Display Popular Photos:** Fetch and display a list of popular photos from the Flickr API.
