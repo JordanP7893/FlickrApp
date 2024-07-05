@@ -8,7 +8,7 @@
 import CoreLocation
 import Foundation
 
-struct Photo: Identifiable {
+struct Photo: Identifiable, Equatable {
     let id: String
     let title: String?
     let description: String?
@@ -52,6 +52,10 @@ struct Photo: Identifiable {
         self.buddyUrlString = buddyUrlString
         self.latLong = latLong
     }
+
+    static func == (lhs: Photo, rhs: Photo) -> Bool {
+        lhs.id == rhs.id
+    }
 }
 
 extension Photo: Decodable {
@@ -83,22 +87,32 @@ extension Photo: Decodable {
         id = try container.decode(String.self, forKey: .id)
         title = try container.decode(String.self, forKey: .title).convertBlankToNil()
         description = try container.decodeIfPresent(Description.self, forKey: .description)?.content
+        ownerId = try container.decode(String.self, forKey: .ownerId)
         owner = try container.decode(String.self, forKey: .ownerName)
-
-        if let tagString = try container.decodeIfPresent(String.self, forKey: .tags) {
-            tags = tagString.split(separator: " ").map { String($0) }
-        } else {
-            tags = nil
-        }
 
         urlString = try container.decodeIfPresent(String.self, forKey: .urlString) ?? ""
 
+        tags = try Photo.decodeTags(from: container)
+        buddyUrlString = try Photo.createBuddyUrlString(from: container)
+        latLong = try Photo.decodeLatitudeLongitude(from: container)
+    }
+
+    static private func decodeTags(from container: KeyedDecodingContainer<CodingKeys>) throws -> [String]? {
+        if let tagString = try container.decodeIfPresent(String.self, forKey: .tags) {
+            return tagString.split(separator: " ").map { String($0) }
+        } else {
+            return nil
+        }
+    }
+
+    static private func createBuddyUrlString(from container: KeyedDecodingContainer<CodingKeys>) throws -> String {
         let iconFarm = Int(try container.decode(Double.self, forKey: .iconFarm))
         let iconServer = try container.decode(String.self, forKey: .iconServer)
-        ownerId = try container.decode(String.self, forKey: .ownerId)
+        let ownerId = try container.decode(String.self, forKey: .ownerId)
+        return "https://farm\(iconFarm).staticflickr.com/\(iconServer)/buddyicons/\(ownerId).jpg"
+    }
 
-        buddyUrlString = "https://farm\(iconFarm).staticflickr.com/\(iconServer)/buddyicons/\(ownerId).jpg"
-
+    static private func decodeLatitudeLongitude(from container: KeyedDecodingContainer<CodingKeys>) throws -> CLLocationCoordinate2D? {
         var latitude: Double?
         var longitude: Double?
 
@@ -114,10 +128,10 @@ extension Photo: Decodable {
             longitude = Double(try container.decode(String.self, forKey: .longitude))
         }
 
-        if let latitude, let longitude, latitude != 0 && longitude != 0 {
-            latLong = .init(latitude: latitude, longitude: longitude)
+        if let latitude = latitude, let longitude = longitude, latitude != 0 && longitude != 0 {
+            return CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
         } else {
-            latLong = nil
+            return nil
         }
     }
 }

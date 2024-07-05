@@ -9,7 +9,6 @@ import SwiftUI
 
 @main
 struct FlickrApp: App {
-    let flickrApi = FlickrApiService()
     let photoSearchService = PhotoSearchService(flickrApi: FlickrApiService())
     let userPhotosService = UserPhotosService(flickrApi: FlickrApiService())
 

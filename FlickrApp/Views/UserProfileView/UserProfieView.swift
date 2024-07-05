@@ -78,7 +78,7 @@ struct UserProfieView: View {
 #Preview {
     class FakeUserPhotosService: UserPhotosServiceProtocol {
         func fetchUsersPhotos(userId: String) async throws -> PhotoResponse {
-            return .init(photos: .init(page: 1, pages: 1, perpage: 1, total: 1, photo: .dummyData))
+            return .dummy
         }
     }
 
