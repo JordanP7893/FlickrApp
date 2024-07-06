@@ -149,10 +149,10 @@
 		4F1F1FA92C38407A0067D7BE /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				4F3D01372C3324D0001BA109 /* ContentView.swift */,
 				4FFD451A2C35AAB10064BFAC /* PhotoListView */,
 				4F3C68252C36A62B00972C6B /* PhotoDetailView */,
 				4F1F1F9B2C37F0B30067D7BE /* UserProfileView */,
-				4F3D01372C3324D0001BA109 /* ContentView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";

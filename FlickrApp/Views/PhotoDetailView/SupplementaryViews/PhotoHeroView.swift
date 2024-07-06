@@ -49,11 +49,13 @@ struct PhotoHeroView: View {
                     Text(photo.owner)
                         .font(photo.title != nil ? .caption : .title2)
                         .italic()
+                        .accessibilityLabel("taken by \(photo.owner)")
                 }
                 .lineLimit(1)
                 .foregroundStyle(.white)
                 .padding(5)
                 .shadow(radius: 10)
+                .accessibilityElement(children: .combine)
             }
         }
     }

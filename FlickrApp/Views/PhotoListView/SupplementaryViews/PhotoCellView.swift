@@ -30,15 +30,15 @@ struct PhotoCellView: View {
                 }
             }
 
-            VStack(alignment: .leading) {
-                Text(owner)
-                    .font(.caption)
-                    .italic()
-                    .foregroundStyle(.secondary)
-                    .lineLimit(1)
-            }
-            .frame(maxWidth: .infinity, alignment: .leading)
+            Text(owner)
+                .font(.caption)
+                .italic()
+                .foregroundStyle(.secondary)
+                .lineLimit(1)
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .accessibilityLabel("taken by \(owner)")
         }
+        .accessibilityElement(children: .combine)
     }
 }
 

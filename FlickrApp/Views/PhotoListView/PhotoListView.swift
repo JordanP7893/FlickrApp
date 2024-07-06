@@ -8,13 +8,19 @@
 import SwiftUI
 
 struct PhotoListView: View {
+    @State private var navigationPath = NavigationPath()
     @State private var viewModel: ViewModel
 
+    enum NavigationDestinations {
+        case photoDetail
+        case userProfile
+    }
+
     var body: some View {
-        NavigationStack {
+        NavigationStack(path: $navigationPath) {
             ScrollView {
                 switch viewModel.state {
-                case .content(let photos): PhotoGrid(photos: photos)
+                case .content(let photos): PhotoGrid(navigationPath: $navigationPath, photos: photos)
                 case .error(let error): errorView(errorMessage: error)
                 case .loading: loadingView
                 }
@@ -61,6 +67,7 @@ struct PhotoListView: View {
 extension PhotoListView {
     struct PhotoGrid: View {
         @EnvironmentObject var userPhotosService: UserPhotosService
+        @Binding var navigationPath: NavigationPath
 
         let columns = Array(repeating: GridItem(alignment: .top), count: 2)
 
@@ -107,6 +114,26 @@ extension PhotoListView {
 
                             if let tags = photo.tags {
                                 PhotoTagsView(tags: tags)
+                            }
+                        }
+                        .accessibilityElement(children: .combine)
+                        .accessibilityAction(named: "User Profile") {
+                            navigationPath.append(NavigationDestinations.userProfile)
+                        }
+                        .accessibilityAction(named: "Photo Detail") {
+                            navigationPath.append(NavigationDestinations.photoDetail)
+                        }
+                        .navigationDestination(for: NavigationDestinations.self) { destination in
+                            switch destination {
+                            case .userProfile: UserProfieView(
+                                ownerName: photo.owner,
+                                buddyUrl: photo.buddyUrl,
+                                viewModel: .init(
+                                    userId: photo.ownerId,
+                                    userPhotosService: userPhotosService
+                                )
+                            )
+                            case .photoDetail: PhotoDetailView(photo: photo)
                             }
                         }
                     }

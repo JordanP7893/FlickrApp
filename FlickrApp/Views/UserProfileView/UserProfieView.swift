@@ -92,6 +92,7 @@ extension UserProfieView {
                                 }
                                 .clipped()
                         }
+                        .accessibilityLabel("Photo Detail")
                     }
                 }
             }
