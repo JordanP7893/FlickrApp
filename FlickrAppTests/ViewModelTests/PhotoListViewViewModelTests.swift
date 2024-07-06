@@ -25,15 +25,27 @@ final class PhotoListViewViewModelTests: XCTestCase {
         super.tearDown()
     }
 
-    func test_givenFetchPopularPhotosReturnsData_whenFetchPopularPhototsIsCalled_thenStateIsSetToPhotosArray() async {
+    func test_givenFetchPopularPhotosReturnsData_whenLoadInitalPhotosIsCalled_thenStateIsSetToPhotosArray() async {
         mockPhotoSearchService.fetchPopularPhotosResult = .success(.dummy)
 
-        await viewModel.fetchPopularPhotos()
+        await viewModel.loadInitalPhotos()
 
         XCTAssertEqual(viewModel.state, .content(PhotoResponse.dummy.photos.photo))
     }
 
-    func test_givenFetchPopularPhotosReturnsError_whenFetchPopularPhototsIsCalled_thenStateIsSetToError() async {
+    func test_givenFetchPopularPhotosReturnsDataButDataAlreadyExists_whenLoadInitalPhotosIsCalled_thenFunctionIsNotCalled() async {
+        mockPhotoSearchService.fetchPopularPhotosResult = .success(.dummy)
+        await viewModel.loadInitalPhotos()
+
+        XCTAssertEqual(mockPhotoSearchService.serviceCallCount, 1)
+        XCTAssertEqual(viewModel.state, .content(PhotoResponse.dummy.photos.photo))
+
+        await viewModel.loadInitalPhotos()
+
+        XCTAssertEqual(mockPhotoSearchService.serviceCallCount, 1)
+    }
+
+    func test_givenFetchPopularPhotosReturnsError_whenLoadInitalPhotosIsCalled_thenStateIsSetToError() async {
         mockPhotoSearchService.fetchPopularPhotosResult = .failure(URLError.init(.badURL))
 
         await viewModel.fetchPopularPhotos()

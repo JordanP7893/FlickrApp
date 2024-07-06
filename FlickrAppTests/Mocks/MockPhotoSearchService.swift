@@ -9,9 +9,11 @@
 import Foundation
 
 class MockPhotoSearchService: PhotoSearchServiceProtocol {
+    var serviceCallCount = 0
     var fetchPopularPhotosResult: Result<PhotoResponse, Error>!
 
     func fetchPopularPhotos() async throws -> PhotoResponse {
+        serviceCallCount += 1
         switch fetchPopularPhotosResult {
         case .success(let photoResponse): return photoResponse
         case .failure(let error): throw error
