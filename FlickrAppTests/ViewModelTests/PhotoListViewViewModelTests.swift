@@ -38,6 +38,6 @@ final class PhotoListViewViewModelTests: XCTestCase {
 
         await viewModel.fetchPopularPhotos()
 
-        XCTAssertEqual(viewModel.state, .error)
+        XCTAssertEqual(viewModel.state, .error(URLError(.badURL).localizedDescription))
     }
 }

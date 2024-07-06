@@ -30,7 +30,7 @@ final class UserProfileViewViewModelTests: XCTestCase {
 
         await viewModel.fetchUserPhotos()
 
-        XCTAssertEqual(viewModel.photos, PhotoResponse.dummy.photos.photo)
+        XCTAssertEqual(viewModel.state, .content(PhotoResponse.dummy.photos.photo))
     }
 
     func test_givenFetchPopularPhotosReturnsError_whenFetchPopularPhototsIsCalled_errorFlagIsSet() async {
@@ -38,6 +38,6 @@ final class UserProfileViewViewModelTests: XCTestCase {
 
         await viewModel.fetchUserPhotos()
 
-        XCTAssertTrue(viewModel.photos.isEmpty)
+        XCTAssertEqual(viewModel.state, .error(URLError(.badURL).localizedDescription))
     }
 }

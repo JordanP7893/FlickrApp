@@ -10,8 +10,14 @@ import Foundation
 extension UserProfieView {
     @Observable
     class ViewModel {
-        private(set) var photos: [Photo] = []
+        private(set) var state: State = .loading
         private var userId: String
+
+        enum State: Equatable {
+            case content([Photo])
+            case error(String)
+            case loading
+        }
 
         let userPhotosService: UserPhotosServiceProtocol!
 
@@ -24,9 +30,9 @@ extension UserProfieView {
         func fetchUserPhotos() async {
             do {
                 let photoData = try await userPhotosService.fetchUsersPhotos(userId: userId)
-                photos = photoData.photos.photo
+                state = .content(photoData.photos.photo)
             } catch {
-                print(error)
+                state = .error(error.localizedDescription)
             }
         }
     }

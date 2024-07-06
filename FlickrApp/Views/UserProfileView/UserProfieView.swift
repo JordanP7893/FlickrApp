@@ -8,8 +8,6 @@
 import SwiftUI
 
 struct UserProfieView: View {
-    let columns = Array(repeating: GridItem(spacing: 1, alignment: .top), count: 3)
-
     let ownerName: String
     let buddyUrl: URL
 
@@ -37,35 +35,13 @@ struct UserProfieView: View {
 
             Divider()
 
-            if viewModel.photos.isEmpty {
-                ProgressView()
+
+            switch viewModel.state {
+            case .content(let photos): PhotoGrid(photos: photos)
+            case .error(let error): errorView(errorMessage: error)
+            case .loading: ProgressView()
                     .controlSize(.large)
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
-            } else {
-                ScrollView {
-                    LazyVGrid(columns: columns, spacing: 1) {
-                        ForEach(viewModel.photos) { photo in
-                            NavigationLink {
-                                PhotoDetailView(photo: photo)
-                            } label: {
-                                Rectangle()
-                                    .aspectRatio(1, contentMode: .fill)
-                                    .overlay {
-                                        AsyncImage(url: photo.url) { image in
-                                            image
-                                                .resizable()
-                                                .scaledToFill()
-                                        } placeholder: {
-                                            Rectangle()
-                                                .foregroundStyle(.background)
-                                                .aspectRatio(1, contentMode: .fill)
-                                        }
-                                    }
-                                    .clipped()
-                            }
-                        }
-                    }
-                }
             }
         }
         .navigationBarTitleDisplayMode(.inline)
@@ -73,7 +49,56 @@ struct UserProfieView: View {
             await viewModel.fetchUserPhotos()
         }
     }
+
+    func errorView(errorMessage: String) -> some View {
+        ZStack {
+            Spacer()
+                .containerRelativeFrame([.horizontal, .vertical])
+
+            ContentUnavailableView(
+                "Error",
+                systemImage: "xmark.circle",
+                description: Text(errorMessage)
+            )
+        }
+    }
 }
+
+extension UserProfieView {
+    struct PhotoGrid: View {
+        let columns = Array(repeating: GridItem(spacing: 1, alignment: .top), count: 3)
+
+        let photos: [Photo]
+
+        var body: some View {
+            ScrollView {
+                LazyVGrid(columns: columns, spacing: 1) {
+                    ForEach(photos) { photo in
+                        NavigationLink {
+                            PhotoDetailView(photo: photo)
+                        } label: {
+                            Rectangle()
+                                .aspectRatio(1, contentMode: .fill)
+                                .overlay {
+                                    AsyncImage(url: photo.url) { image in
+                                        image
+                                            .resizable()
+                                            .scaledToFill()
+                                    } placeholder: {
+                                        Rectangle()
+                                            .foregroundStyle(.background)
+                                            .aspectRatio(1, contentMode: .fill)
+                                    }
+                                }
+                                .clipped()
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
 
 #Preview {
     class FakeUserPhotosService: UserPhotosServiceProtocol {

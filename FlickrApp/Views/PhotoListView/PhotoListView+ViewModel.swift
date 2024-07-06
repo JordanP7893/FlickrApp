@@ -12,27 +12,31 @@ extension PhotoListView {
     class ViewModel {
         private(set) var state: State = .loading
 
+        enum State: Equatable {
+            case content([Photo])
+            case error(String)
+            case loading
+        }
+
         let photoSearchService: PhotoSearchServiceProtocol!
 
         init(photoSearchService: PhotoSearchServiceProtocol!) {
             self.photoSearchService = photoSearchService
         }
 
-        func fetchPopularPhotos() async {
+        func loadInitalPhotos() async {
             if case let .content(photos) = state, !photos.isEmpty { return }
 
+            await fetchPopularPhotos()
+        }
+
+        func fetchPopularPhotos() async {
             do {
                 let photoData = try await photoSearchService.fetchPopularPhotos()
                 state = .content(photoData.photos.photo)
             } catch {
-                state = .error
+                state = .error(error.localizedDescription)
             }
-        }
-
-        enum State: Equatable {
-            case content([Photo])
-            case error
-            case loading
         }
     }
 }
