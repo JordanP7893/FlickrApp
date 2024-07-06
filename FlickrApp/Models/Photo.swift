@@ -8,7 +8,7 @@
 import CoreLocation
 import Foundation
 
-struct Photo: Identifiable, Equatable {
+struct Photo: Identifiable, Equatable, Hashable {
     let id: String
     let title: String?
     let description: String?

@@ -8,13 +8,14 @@
 import SwiftUI
 
 struct PhotoListView: View {
+    enum NavigationDestinations: Hashable {
+        case photoDetail(Photo)
+        case userProfile(Photo)
+    }
+
+    @EnvironmentObject var userPhotosService: UserPhotosService
     @State private var navigationPath = NavigationPath()
     @State private var viewModel: ViewModel
-
-    enum NavigationDestinations {
-        case photoDetail
-        case userProfile
-    }
 
     var body: some View {
         NavigationStack(path: $navigationPath) {
@@ -32,6 +33,19 @@ struct PhotoListView: View {
                 await viewModel.fetchPopularPhotos()
             }
             .navigationTitle("Photos")
+            .navigationDestination(for: NavigationDestinations.self) { destination in
+                switch destination {
+                case .userProfile(let photo): UserProfieView(
+                    ownerName: photo.owner,
+                    buddyUrl: photo.buddyUrl,
+                    viewModel: .init(
+                        userId: photo.ownerId,
+                        userPhotosService: userPhotosService
+                    )
+                )
+                case .photoDetail(let photo): PhotoDetailView(photo: photo)
+                }
+            }
         }
     }
 
@@ -118,23 +132,10 @@ extension PhotoListView {
                         }
                         .accessibilityElement(children: .combine)
                         .accessibilityAction(named: "User Profile") {
-                            navigationPath.append(NavigationDestinations.userProfile)
+                            navigationPath.append(PhotoListView.NavigationDestinations.userProfile(photo))
                         }
                         .accessibilityAction(named: "Photo Detail") {
-                            navigationPath.append(NavigationDestinations.photoDetail)
-                        }
-                        .navigationDestination(for: NavigationDestinations.self) { destination in
-                            switch destination {
-                            case .userProfile: UserProfieView(
-                                ownerName: photo.owner,
-                                buddyUrl: photo.buddyUrl,
-                                viewModel: .init(
-                                    userId: photo.ownerId,
-                                    userPhotosService: userPhotosService
-                                )
-                            )
-                            case .photoDetail: PhotoDetailView(photo: photo)
-                            }
+                            navigationPath.append(PhotoListView.NavigationDestinations.photoDetail(photo))
                         }
                     }
                 }
