@@ -20,11 +20,6 @@ struct ContentView: View {
 }
 
 #Preview {
-    let flickrApi = FlickrApiService()
-    let photoSearchService = PhotoSearchService(flickrApi: FlickrApiService())
-    let userPhotosService = UserPhotosService(flickrApi: FlickrApiService())
-
-    return ContentView()
-        .environmentObject(photoSearchService)
-        .environmentObject(userPhotosService)
+    ContentView()
+        .injectDependancies()
 }
