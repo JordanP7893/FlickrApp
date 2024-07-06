@@ -1,5 +1,5 @@
 //
-//  UserProfileViewViewModeltests.swift
+//  UserProfileViewViewModelTests.swift
 //  FlickrAppTests
 //
 //  Created by Jordan Porter on 05/07/2024.
@@ -25,7 +25,7 @@ final class UserProfileViewViewModelTests: XCTestCase {
         super.tearDown()
     }
 
-    func test_givenFetchPopularPhotosReturnsData_whenFetchPopularPhototsIsCalled_photosVariableIsSet() async {
+    func test_givenFetchPopularPhotosReturnsData_whenFetchPopularPhototsIsCalled_thenStateIsSetToPhotosArray() async {
         mockUserPhotosService.fetchUsersPhotosResult = .success(.dummy)
 
         await viewModel.fetchUserPhotos()
@@ -33,7 +33,7 @@ final class UserProfileViewViewModelTests: XCTestCase {
         XCTAssertEqual(viewModel.state, .content(PhotoResponse.dummy.photos.photo))
     }
 
-    func test_givenFetchPopularPhotosReturnsError_whenFetchPopularPhototsIsCalled_errorFlagIsSet() async {
+    func test_givenFetchPopularPhotosReturnsError_whenFetchPopularPhototsIsCalled_theStateIsSetToError() async {
         mockUserPhotosService.fetchUsersPhotosResult = .failure(URLError.init(.badURL))
 
         await viewModel.fetchUserPhotos()

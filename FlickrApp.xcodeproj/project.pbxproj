@@ -14,8 +14,13 @@
 		4F1F1FA32C380DFE0067D7BE /* UserPhotosService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F1F1FA22C380DFE0067D7BE /* UserPhotosService.swift */; };
 		4F1F1FA52C381B050067D7BE /* PhotoResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F1F1FA42C381B050067D7BE /* PhotoResponse.swift */; };
 		4F1F1FA82C383AA10067D7BE /* MockPhotoSearchService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F1F1FA72C383AA10067D7BE /* MockPhotoSearchService.swift */; };
-		4F1F1FAB2C3846C90067D7BE /* UserProfileViewViewModeltests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F1F1FAA2C3846C90067D7BE /* UserProfileViewViewModeltests.swift */; };
+		4F1F1FAB2C3846C90067D7BE /* UserProfileViewViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F1F1FAA2C3846C90067D7BE /* UserProfileViewViewModelTests.swift */; };
 		4F1F1FAF2C3847170067D7BE /* MockUserPhotosService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F1F1FAE2C3847170067D7BE /* MockUserPhotosService.swift */; };
+		4F1F1FB22C3979D00067D7BE /* MockFlickrApiService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F1F1FB12C3979D00067D7BE /* MockFlickrApiService.swift */; };
+		4F1F1FB52C397A670067D7BE /* PhotoSearchServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F1F1FB42C397A670067D7BE /* PhotoSearchServiceTests.swift */; };
+		4F1F1FB72C3986CE0067D7BE /* UserPhotosServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F1F1FB62C3986CE0067D7BE /* UserPhotosServiceTests.swift */; };
+		4F1F1FB92C398B940067D7BE /* MockUrlProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F1F1FB82C398B940067D7BE /* MockUrlProtocol.swift */; };
+		4F1F1FBB2C398C8D0067D7BE /* FlickrApiServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F1F1FBA2C398C8D0067D7BE /* FlickrApiServiceTests.swift */; };
 		4F3C68242C36A5F700972C6B /* PhotoHeroView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F3C68232C36A5F700972C6B /* PhotoHeroView.swift */; };
 		4F3D01362C3324D0001BA109 /* FlickrApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F3D01352C3324D0001BA109 /* FlickrApp.swift */; };
 		4F3D01382C3324D0001BA109 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F3D01372C3324D0001BA109 /* ContentView.swift */; };
@@ -58,8 +63,13 @@
 		4F1F1FA22C380DFE0067D7BE /* UserPhotosService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPhotosService.swift; sourceTree = "<group>"; };
 		4F1F1FA42C381B050067D7BE /* PhotoResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoResponse.swift; sourceTree = "<group>"; };
 		4F1F1FA72C383AA10067D7BE /* MockPhotoSearchService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockPhotoSearchService.swift; sourceTree = "<group>"; };
-		4F1F1FAA2C3846C90067D7BE /* UserProfileViewViewModeltests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileViewViewModeltests.swift; sourceTree = "<group>"; };
+		4F1F1FAA2C3846C90067D7BE /* UserProfileViewViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileViewViewModelTests.swift; sourceTree = "<group>"; };
 		4F1F1FAE2C3847170067D7BE /* MockUserPhotosService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockUserPhotosService.swift; sourceTree = "<group>"; };
+		4F1F1FB12C3979D00067D7BE /* MockFlickrApiService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockFlickrApiService.swift; sourceTree = "<group>"; };
+		4F1F1FB42C397A670067D7BE /* PhotoSearchServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoSearchServiceTests.swift; sourceTree = "<group>"; };
+		4F1F1FB62C3986CE0067D7BE /* UserPhotosServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPhotosServiceTests.swift; sourceTree = "<group>"; };
+		4F1F1FB82C398B940067D7BE /* MockUrlProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockUrlProtocol.swift; sourceTree = "<group>"; };
+		4F1F1FBA2C398C8D0067D7BE /* FlickrApiServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlickrApiServiceTests.swift; sourceTree = "<group>"; };
 		4F3C68232C36A5F700972C6B /* PhotoHeroView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoHeroView.swift; sourceTree = "<group>"; };
 		4F3D01322C3324D0001BA109 /* FlickrApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FlickrApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4F3D01352C3324D0001BA109 /* FlickrApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlickrApp.swift; sourceTree = "<group>"; };
@@ -128,6 +138,8 @@
 			children = (
 				4F1F1FA72C383AA10067D7BE /* MockPhotoSearchService.swift */,
 				4F1F1FAE2C3847170067D7BE /* MockUserPhotosService.swift */,
+				4F1F1FB12C3979D00067D7BE /* MockFlickrApiService.swift */,
+				4F1F1FB82C398B940067D7BE /* MockUrlProtocol.swift */,
 			);
 			path = Mocks;
 			sourceTree = "<group>";
@@ -146,9 +158,19 @@
 			isa = PBXGroup;
 			children = (
 				4F3D01472C3324D2001BA109 /* PhotoListViewViewModelTests.swift */,
-				4F1F1FAA2C3846C90067D7BE /* UserProfileViewViewModeltests.swift */,
+				4F1F1FAA2C3846C90067D7BE /* UserProfileViewViewModelTests.swift */,
 			);
 			path = ViewModelTests;
+			sourceTree = "<group>";
+		};
+		4F1F1FB32C397A390067D7BE /* ServiceTests */ = {
+			isa = PBXGroup;
+			children = (
+				4F1F1FB42C397A670067D7BE /* PhotoSearchServiceTests.swift */,
+				4F1F1FB62C3986CE0067D7BE /* UserPhotosServiceTests.swift */,
+				4F1F1FBA2C398C8D0067D7BE /* FlickrApiServiceTests.swift */,
+			);
+			path = ServiceTests;
 			sourceTree = "<group>";
 		};
 		4F3C68252C36A62B00972C6B /* PhotoDetailView */ = {
@@ -209,6 +231,7 @@
 			children = (
 				4F1F1FA62C383A900067D7BE /* Mocks */,
 				4F1F1FB02C3848080067D7BE /* ViewModelTests */,
+				4F1F1FB32C397A390067D7BE /* ServiceTests */,
 			);
 			path = FlickrAppTests;
 			sourceTree = "<group>";
@@ -422,9 +445,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				4F1F1FA82C383AA10067D7BE /* MockPhotoSearchService.swift in Sources */,
+				4F1F1FBB2C398C8D0067D7BE /* FlickrApiServiceTests.swift in Sources */,
 				4F1F1FAF2C3847170067D7BE /* MockUserPhotosService.swift in Sources */,
-				4F1F1FAB2C3846C90067D7BE /* UserProfileViewViewModeltests.swift in Sources */,
+				4F1F1FB52C397A670067D7BE /* PhotoSearchServiceTests.swift in Sources */,
+				4F1F1FB22C3979D00067D7BE /* MockFlickrApiService.swift in Sources */,
+				4F1F1FB72C3986CE0067D7BE /* UserPhotosServiceTests.swift in Sources */,
+				4F1F1FAB2C3846C90067D7BE /* UserProfileViewViewModelTests.swift in Sources */,
 				4F3D01482C3324D2001BA109 /* PhotoListViewViewModelTests.swift in Sources */,
+				4F1F1FB92C398B940067D7BE /* MockUrlProtocol.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

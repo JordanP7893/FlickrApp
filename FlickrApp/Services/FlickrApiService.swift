@@ -12,6 +12,12 @@ protocol FlickrApiServiceProtocol {
 }
 
 class FlickrApiService: FlickrApiServiceProtocol {
+    private let session: URLSession
+
+    init(session: URLSession = .shared) {
+        self.session = session
+    }
+
     func callFlickrApi(with additionalQueryItems: [URLQueryItem]) async throws -> Data {
         var components = URLComponents()
 
@@ -34,7 +40,7 @@ class FlickrApiService: FlickrApiServiceProtocol {
         let request = NSMutableURLRequest(url: url, cachePolicy: .useProtocolCachePolicy, timeoutInterval: 5.0)
         request.httpMethod = "GET"
 
-        let (data, response) = try await URLSession.shared.data(for: request as URLRequest)
+        let (data, response) = try await session.data(for: request as URLRequest)
 
         guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 else { throw URLError(.badServerResponse) }
 
