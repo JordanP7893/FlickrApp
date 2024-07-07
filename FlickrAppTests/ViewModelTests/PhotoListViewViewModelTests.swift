@@ -37,12 +37,12 @@ final class PhotoListViewViewModelTests: XCTestCase {
         mockPhotoSearchService.fetchPopularPhotosResult = .success(.dummy)
         await viewModel.loadInitalPhotos()
 
-        XCTAssertEqual(mockPhotoSearchService.serviceCallCount, 1)
+        XCTAssertEqual(mockPhotoSearchService.fetchPopularPhotosServiceCallCount, 1)
         XCTAssertEqual(viewModel.state, .content(PhotoResponse.dummy.photos.photo))
 
         await viewModel.loadInitalPhotos()
 
-        XCTAssertEqual(mockPhotoSearchService.serviceCallCount, 1)
+        XCTAssertEqual(mockPhotoSearchService.fetchPopularPhotosServiceCallCount, 1)
     }
 
     func test_givenFetchPopularPhotosReturnsError_whenLoadInitalPhotosIsCalled_thenStateIsSetToError() async {

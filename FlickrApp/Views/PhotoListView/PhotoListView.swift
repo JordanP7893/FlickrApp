@@ -20,11 +20,24 @@ struct PhotoListView: View {
     var body: some View {
         NavigationStack(path: $navigationPath) {
             ScrollView {
+                if viewModel.tokens.count > 1 {
+                    Toggle("Match all tags", isOn: $viewModel.matchingAllTags)
+                        .padding(.horizontal)
+                        .bold()
+                    Divider()
+                }
+
                 switch viewModel.state {
                 case .content(let photos): PhotoGrid(navigationPath: $navigationPath, photos: photos)
                 case .error(let error): errorView(errorMessage: error)
                 case .loading: loadingView
                 }
+            }
+            .searchable(text: $viewModel.searchText, tokens: $viewModel.tokens) { token in
+                Text(token.text)
+            }
+            .onSubmit(of: .search) {
+                viewModel.enterKeyPressed()
             }
             .task {
                 await viewModel.loadInitalPhotos()
@@ -61,7 +74,7 @@ struct PhotoListView: View {
             ContentUnavailableView(
                 "Error",
                 systemImage: "xmark.circle",
-                description: Text("Pull down to refresh \n\n \(errorMessage)")
+                description: Text(errorMessage)
             )
         }
     }
@@ -153,6 +166,10 @@ extension PhotoListView {
 
 #Preview {
     class FakePhotoSearchService: PhotoSearchServiceProtocol {
+        func fetchPhotosMatching(tags: String, matchingAll: Bool) async throws -> PhotoResponse {
+            return .dummy
+        }
+        
         func fetchPopularPhotos() async throws -> PhotoResponse {
             return .dummy
         }
