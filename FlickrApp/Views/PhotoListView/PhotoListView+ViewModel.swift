@@ -80,6 +80,7 @@ extension PhotoListView.ViewModel {
     }
 
     private func triggerSearch() {
+        guard !tokens.isEmpty else { return }
         state = .loading
         currentTask?.cancel()
 

@@ -52,4 +52,42 @@ final class PhotoListViewViewModelTests: XCTestCase {
 
         XCTAssertEqual(viewModel.state, .error(URLError(.badURL).localizedDescription))
     }
+
+    func test_givenFetchPhotosMatchingTagsReturnsData_whenEnterKeyPressedIsCalled_thenStateIsSetToPhotosArray() {
+        let expectation = XCTestExpectation(description: "Fetch photos successfully")
+        viewModel.searchText = "Test"
+        mockPhotoSearchService.fetchPhotosMatchingTagsResult = .success(.dummy)
+
+        Task {
+            viewModel.enterKeyPressed()
+            expectation.fulfill()
+        }
+
+        wait(for: [expectation], timeout: 1.0)
+        XCTAssertEqual(viewModel.state, .content(PhotoResponse.dummy.photos.photo))
+    }
+
+    func test_givenFetchPhotosMatchingTagsReturnsError_whenEnterKeyPressedIsCalled_thenStateIsSetToError() {
+        viewModel.searchText = "Test"
+        mockPhotoSearchService.fetchPhotosMatchingTagsResult = .failure(URLError.init(.badURL))
+
+        viewModel.enterKeyPressed()
+
+        sleep(1)
+        XCTAssertEqual(viewModel.state, .error(URLError(.badURL).localizedDescription))
+    }
+
+    func test_givenFetchPhotosMatchingTagsReturnsData_whenEnterKeyPressedIsAndSearchTextIsBlankCalled_thenStateIsSetToPhotosArray() {
+        let expectation = XCTestExpectation(description: "Fetch photos successfully")
+        viewModel.searchText = ""
+        mockPhotoSearchService.fetchPhotosMatchingTagsResult = .success(.dummy)
+
+        Task {
+            viewModel.enterKeyPressed()
+            expectation.fulfill()
+        }
+
+        wait(for: [expectation], timeout: 1.0)
+        XCTAssertEqual(mockPhotoSearchService.fetchPhotosMatchingTagsServiceCallCount, 0)
+    }
 }

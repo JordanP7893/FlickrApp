@@ -25,7 +25,8 @@ class MockPhotoSearchService: PhotoSearchServiceProtocol {
     var fetchPhotosMatchingTagsResult: Result<PhotoResponse, Error>!
 
     func fetchPhotosMatching(tags: String, matchingAll: Bool) async throws -> PhotoResponse {
-        switch fetchPopularPhotosResult {
+        fetchPhotosMatchingTagsServiceCallCount += 1
+        switch fetchPhotosMatchingTagsResult {
         case .success(let photoResponse): return photoResponse
         case .failure(let error): throw error
         case .none: fatalError("fetchPopularPhotosResult was not set in the mock")

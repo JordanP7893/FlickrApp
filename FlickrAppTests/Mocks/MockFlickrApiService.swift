@@ -13,8 +13,10 @@ import XCTest
 class MockFlickrApiService: FlickrApiServiceProtocol {
     var shouldReturnError = false
     var responseData: Data?
+    var queryItems: [URLQueryItem]?
 
     func callFlickrApi(with queryItems: [URLQueryItem]) async throws -> Data {
+        self.queryItems = queryItems
         if shouldReturnError {
             throw URLError(.badServerResponse)
         }
