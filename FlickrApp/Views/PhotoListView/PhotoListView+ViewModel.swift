@@ -16,6 +16,7 @@ extension PhotoListView {
             case loading
         }
 
+        private var currentTask: Task<Void, Never>? = nil
         private(set) var state: State = .loading
         var searchText: String = "" {
             didSet {
@@ -56,36 +57,43 @@ extension PhotoListView {
             addSearchToken()
             triggerSearch()
         }
+    }
+}
 
-        private func addSearchToken() {
-            let trimmedText = searchText.trimmingCharacters(in: .whitespaces)
-            guard trimmedText != "" else { return }
+extension PhotoListView.ViewModel {
+    private func addSearchToken() {
+        let trimmedText = searchText.trimmingCharacters(in: .whitespaces)
+        guard trimmedText != "" else { return }
 
-            let words = trimmedText.split(separator: " ")
+        let words = trimmedText.split(separator: " ")
 
-            for word in words {
-                let newToken = Token(text: String(word))
-                if !tokens.contains(newToken) {
-                    withAnimation {
-                        tokens.append(newToken)
-                    }
+        for word in words {
+            let newToken = Token(text: String(word))
+            if !tokens.contains(newToken) {
+                withAnimation {
+                    tokens.append(newToken)
                 }
             }
-
-            searchText = ""
         }
 
-        private func triggerSearch() {
-            state = .loading
+        searchText = ""
+    }
 
-            Task {
-                do {
-                    let tags = tokens.map { $0.text }.joined(separator: ",")
-                    let photoData = try await photoSearchService.fetchPhotosMatching(tags: tags, matchingAll: matchingAllTags)
-                    state = .content(photoData.photos.photo)
-                } catch {
-                    state = .error(error.localizedDescription)
-                }
+    private func triggerSearch() {
+        state = .loading
+        currentTask?.cancel()
+
+        currentTask = Task {
+            do {
+                let tags = tokens.map { $0.text }.joined(separator: ",")
+                let photoData = try await photoSearchService.fetchPhotosMatching(
+                    tags: tags,
+                    matchingAll: matchingAllTags
+                )
+
+                state = .content(photoData.photos.photo)
+            } catch {
+                state = .error(error.localizedDescription)
             }
         }
     }
