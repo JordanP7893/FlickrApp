@@ -37,7 +37,7 @@ class FlickrApiService: FlickrApiServiceProtocol {
 
         guard let url = components.url else { throw URLError(.badURL) }
 
-        let request = NSMutableURLRequest(url: url, cachePolicy: .useProtocolCachePolicy, timeoutInterval: 5.0)
+        let request = NSMutableURLRequest(url: url, cachePolicy: .useProtocolCachePolicy, timeoutInterval: 20.0)
         request.httpMethod = "GET"
 
         let (data, response) = try await session.data(for: request as URLRequest)
