@@ -9,6 +9,7 @@
 ## Features
 
 - **Display Popular Photos:** Fetch and display a list of popular photos from the Flickr API.
+- **Photo Search:** Search by tag for a specific list of photos.
 - **Photo Details:** View more information about each photo, including tags and a map view with the location the photo was taken.
 - **User Photos:** Explore more photos by a specific users in an "Instagram style" view.
 
